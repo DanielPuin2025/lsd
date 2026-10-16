@@ -15,7 +15,7 @@ Las salas y los resúmenes cerrados se conservan para que se puedan consultar co
 
 ## Copias de seguridad
 
-El volumen protege los datos frente a reinicios y nuevos despliegues, pero no frente al borrado del volumen o a un fallo del servidor. Antes de cada jornada de pruebas y de la sustentación, descarga una copia de `/data/rooms.json` desde la consola de EasyPanel y guárdala fuera del servidor. No publiques esa copia: contiene las claves de administrador y las respuestas de las salas.
+El volumen protege los datos frente a reinicios y nuevos despliegues, pero no frente al borrado del volumen o a un fallo del servidor. Antes de cada jornada de pruebas y de la sustentación, abre **Almacenamiento** en EasyPanel, pulsa **Crear copia de seguridad de volumen** y confirma que la copia aparece en la lista. Guarda además una copia fuera del servidor. No publiques `rooms.json` ni sus copias: contienen las claves de administrador y las respuestas de las salas.
 
 ## Prueba de persistencia
 
