@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="Images/lsd-favicon.png">
+<title>L.S.D · Lenguaje Sutil sobre Drogas</title>
+<meta name="description" content="Quiz interactivo para la prevención del consumo de drogas en niños, niñas y adolescentes de Colombia.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/burbujas.css">
+</head>
+<body>
+
+<!-- 1. PANTALLA DE CARGA -->
+<div id="loader"><div class="ring"></div><div class="bar"><i></i></div><p>Cargando</p></div>
+
+<!-- 2. MENÚ DE NAVEGACIÓN -->
+<header>
+<nav>
+<a class="logo" href="#inicio"><img src="Images/lsd-favicon.png" alt="" onerror="this.style.display='none'">L.S.D</a>
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#acerca">Acerca de</a></li>
+<li><a href="#juego">Juego</a></li>
+<li><a href="#quiz-sec">Quiz</a></li>
+<li><a href="#sala">Sala</a></li>
+<li><a href="#personajes">Personajes</a></li>
+<li><a href="#leyes">Leyes</a></li>
+<li><a href="#contacto">Contacto</a></li>
+</ul>
+</nav>
+</header>
+
+<main>
+<!-- 3. INICIO: "lsd" en máquina de escribir y título -->
+<div class="hero" id="inicio">
+<div class="type"><span id="tw"></span><span class="cursor"></span></div>
+<h1 class="title" id="ttl">Bombas de <b>iluminación</b></h1>
+<p class="welcome" id="wl">Bienvenidos al quiz interactivo acerca de la prevención del consumo de drogas.</p>
+<a class="btn" id="cta" href="#juego">Empezar el quiz</a>
+<!-- Personajes flotantes: caminan solo dentro del inicio (js/burbujas.js) -->
+<div id="burbujas"></div>
+</div>
+
+<!-- 4. ACERCA DE (oculta hasta pulsar la opción del menú) -->
+<section id="acerca" hidden>
+<h2>¿De qué trata <span>esta página</span>?</h2>
+<button class="btn btn-small" id="cerrar">Cerrar</button>
+<p class="lead">L.S.D significa <b>Lenguaje Sutil sobre Drogas</b>. Es un proyecto educativo que usa personajes y un quiz interactivo para hablar de las drogas de forma clara y sin juzgar.</p>
+<div class="intro">
+<div class="box"><h3>¿A quién va dirigida?</h3><p>A niños, niñas y adolescentes, y también a familias y docentes que quieran conversar sobre el tema.</p></div>
+<div class="box"><h3>¿Sobre qué trata?</h3><p>Sobre qué son algunas sustancias comunes, cómo afectan el cuerpo y la mente, y cómo tomar mejores decisiones.</p></div>
+<div class="box"><h3>¿Por qué fue creada?</h3><p>Para promover la prevención y la educación con información veraz y un formato cercano a los jóvenes.</p></div>
+</div>
+</section>
+
+<!-- 5. CHARLA INTERACTIVA (charla.html dentro de un recuadro) -->
+<section id="juego">
+<h2>Charla <span>interactiva</span></h2>
+<p class="lead">Conversa con el guía y conoce los tres tipos de drogas, en qué afectan y sus consecuencias.</p>
+<iframe src="charla.html" class="game-frame" title="Charla interactiva L.S.D" allow="autoplay; fullscreen"></iframe>
+</section>
+
+<!-- 6. QUIZ -->
+<section id="quiz-sec">
+<h2>Pon a prueba <span>lo que sabes</span></h2>
+<p class="lead">Responde 5 preguntas y descubre cuánto aprendiste.</p>
+<div id="quiz">
+<div class="prog" id="prog"></div>
+<p id="qtxt"></p>
+<div id="opts"></div>
+<p id="fb"></p>
+<button class="btn" id="next">Siguiente</button>
+</div>
+</section>
+
+<!-- 6b. SALA Y EXAMEN EN GRUPO (lógica en js/sala.js; preguntas en js/sala-datos.js) -->
+<section id="sala">
+<h2>Quiz en <span>sala</span></h2>
+<p class="lead">Entra como admin para crear una sala, o como integrante con el código. Los integrantes se reparten en grupos de máximo 10 (Grupo 1 a Grupo 5).</p>
+<div id="sala-box">
+<p class="aviso-s" id="s-local" hidden>Modo local: no se detectó el servidor, así que la sala solo funciona en este navegador. Para varias personas ejecuta <b>node server.js</b>.</p>
+
+<div class="sv" id="s-inicio">
+<p class="prog">Elige cómo quieres entrar</p>
+<div class="fila"><button class="sbtn" id="s-radmin">Soy admin</button><button class="sbtn" id="s-rint">Soy integrante</button></div>
+<div class="sv" id="s-fadmin" hidden>
+<p class="sm">Crea una sala nueva y comparte el código con tu grupo.</p>
+<button class="sbtn" id="s-crear">Crear sala nueva</button>
+<p class="sm">¿Ya tienes una sala? Entra con tu código y tu clave.</p>
+<label>Código de la sala<input id="s-acod2" maxlength="5" autocomplete="off"></label>
+<label>Clave de admin<input id="s-akey2" maxlength="16" autocomplete="off"></label>
+<button class="sbtn sec" id="s-adin">Entrar como admin</button>
+</div>
+<div class="sv" id="s-fint" hidden>
+<label>Código de la sala<input id="s-cod" maxlength="5" autocomplete="off"></label>
+<label>Tu nombre o apodo<input id="s-nom" maxlength="30" autocomplete="off"></label>
+<button class="sbtn" id="s-unir">Entrar a la sala</button>
+<p class="sm">Te asignamos el grupo automáticamente: primero el Grupo 1 hasta llenarlo (10 personas), luego el Grupo 2, y así hasta el Grupo 5.</p>
+</div>
+<p class="serr" id="s-err"></p>
+</div>
+
+<div class="sv" id="s-admin" hidden>
+<h3>Panel del admin</h3>
+<p>Código de la sala: <b class="scod" id="s-acod"></b> · Clave de admin: <b id="s-akey"></b></p>
+<p class="sm">Comparte el código. Cuando todos estén dentro, pulsa «Iniciar quiz».</p>
+<p class="sm">Al cerrar, la sala se elimina y los resultados quedan visibles aquí hasta que salgas.</p>
+<div class="fila"><button class="sbtn" id="s-ini">Iniciar quiz</button><button class="sbtn sec" id="s-cer">Cerrar quiz y eliminar sala</button></div>
+<div id="s-res"></div>
+</div>
+
+<div class="sv" id="s-esp" hidden>
+<h3>Sala <span id="s-ecod"></span></h3>
+<p>Hola <b id="s-enom"></b>, estás en el <b id="s-egru"></b>.</p>
+<div class="aviso-q"><b>Antes de empezar:</b> leer las características de los 3 tipos de drogas (en la charla) y la información de los personajes es <b>opcional, pero importante</b>. Te ayuda a recordar lo visto y a responder mejor.
+<div class="fila"><a class="sbtn sec" href="#juego">Ver la charla</a><a class="sbtn sec" href="#personajes">Ver los personajes</a></div></div>
+<p class="sm" id="s-emsg">Esperando a que el admin inicie el quiz…</p>
+<button class="sbtn" id="s-go" hidden>Empezar quiz</button>
+</div>
+
+<div class="sv" id="s-quiz" hidden>
+<div class="prog" id="s-prog"></div>
+<p id="s-qtxt" class="sq"></p>
+<div id="s-opts"></div>
+<p id="s-fb" class="sfb"></p>
+<button class="sbtn" id="s-next" style="display:none">Siguiente</button>
+</div>
+
+<div class="sv" id="s-fin" hidden>
+<h3>¡Terminaste!</h3>
+<p id="s-pts"></p>
+<div id="s-tem"></div>
+<div class="aviso-q"><b>Recordatorio rápido</b>
+<p><b>Depresoras:</b> enlentecen el sistema nervioso; mezclarlas entre sí es muy peligroso.</p>
+<p><b>Estimulantes:</b> aceleran el cuerpo y pueden dañar el corazón; del tusi no se sabe qué contiene.</p>
+<p><b>Alucinógenas:</b> alteran la percepción y pueden causar pánico y agravar problemas de salud mental.</p>
+<p>Decir <b>no</b> es válido. Si necesitas apoyo: Línea 141 (ICBF) o Línea 106 (salud mental).</p></div>
+</div>
+
+<button class="sbtn sec" id="s-salir" hidden>Salir de la sala</button>
+</div>
+</section>
+
+<!-- 7. PERSONAJES (se generan desde js/datos.js) -->
+<section id="personajes">
+<h2>Conoce a <span>los personajes</span></h2>
+<p class="lead">Toca un personaje para desplegar su información: qué es, en qué afecta y sus efectos a corto, mediano y largo plazo.</p>
+<div class="acordeon" id="chars"></div>
+<p class="aviso">Información general con fines educativos; no reemplaza la orientación de un profesional de la salud.</p>
+</section>
+
+<!-- 8. MARCO LEGAL Y REFERENCIAS (oculto hasta pulsar la opción del menú) -->
+<section id="leyes" hidden>
+<h2>Marco legal y <span>referencias</span></h2>
+<button class="btn btn-small" id="cerrar-leyes">Cerrar</button>
+<p class="lead">Normas internacionales y colombianas sobre prevención del consumo de sustancias y protección de niños, niñas y adolescentes.</p>
+<div class="refs">
+<div class="ref"><b>Convención sobre los Derechos del Niño (Ley 12 de 1991)</b><span>Su artículo 33 obliga a los Estados a proteger a los niños del uso ilícito de sustancias.</span><br><a href="https://www.ohchr.org/es/instruments-mechanisms/instruments/convention-rights-child" target="_blank" rel="noopener">Fuente: ONU Derechos Humanos</a></div>
+<div class="ref"><b>Convenciones de la ONU sobre fiscalización de drogas (1961, 1971 y 1988)</b><span>Tratados internacionales que regulan estupefacientes y sustancias sicotrópicas.</span><br><a href="https://www.unodc.org/unodc/en/treaties/index.html" target="_blank" rel="noopener">Fuente: UNODC</a></div>
+<div class="ref"><b>Ley 30 de 1986 – Estatuto Nacional de Estupefacientes</b><span>Normas sobre estupefacientes, prevención y campañas educativas en Colombia.</span><br><a href="https://www.secretariasenado.gov.co/senado/basedoc/ley_0030_1986.html" target="_blank" rel="noopener">Fuente: Secretaría del Senado</a></div>
+<div class="ref"><b>Ley 1098 de 2006 – Código de la Infancia y la Adolescencia</b><span>Derechos de niños, niñas y adolescentes, incluida su protección frente al consumo de sustancias.</span><br><a href="https://www.secretariasenado.gov.co/senado/basedoc/ley_1098_2006.html" target="_blank" rel="noopener">Fuente: Secretaría del Senado</a></div>
+<div class="ref"><b>Ley 1566 de 2012</b><span>Atención integral a personas que consumen sustancias psicoactivas.</span><br><a href="https://www.secretariasenado.gov.co/senado/basedoc/ley_1566_2012.html" target="_blank" rel="noopener">Fuente: Secretaría del Senado</a></div>
+<div class="ref"><b>Ley 1616 de 2013 – Salud Mental</b><span>Garantiza el derecho a la salud mental, con énfasis en niños y adolescentes.</span><br><a href="https://www.secretariasenado.gov.co/senado/basedoc/ley_1616_2013.html" target="_blank" rel="noopener">Fuente: Secretaría del Senado</a></div>
+<div class="ref"><b>Política Integral para la Prevención y Atención del Consumo de SPA (Resolución 089 de 2019)</b><span>Lineamientos del Ministerio de Salud para prevenir y atender el consumo.</span><br><a href="https://www.minsalud.gov.co" target="_blank" rel="noopener">Fuente: Ministerio de Salud y Protección Social</a></div>
+</div>
+</section>
+</main>
+
+<!-- 9. PIE DE PÁGINA: contacto -->
+<footer id="contacto">
+<div class="fg">
+<div><h4>L.S.D</h4><p>Lenguaje Sutil sobre Drogas. Proyecto educativo de prevención del consumo de drogas.</p></div>
+<div class="creator-contact">
+<div class="creator-heading"><h4>Contacto del creador</h4><button class="creator-toggle" id="creator-toggle" type="button" aria-expanded="false" aria-controls="creator-details">Conoce al creador</button></div>
+<div class="creator-details" id="creator-details" hidden>
+<div class="creator-profile"><img src="Images/CREADOR.jpeg" alt="Danny Chacón Guerrero"><span>Danny Chacón Guerrero</span></div>
+</div>
+<ul>
+<li>Correo: <a href="mailto:001coffe@gmail.com">001coffe@gmail.com</a></li>
+<li>Tel: <a href="tel:+573203634811">+57 320 363 4811</a></li>
+</ul></div>
+<div><h4>¿Necesitas ayuda?</h4><ul>
+<li>Línea 141 – ICBF</li>
+<li>Línea 106 – Salud mental</li>
+<li>Línea 123 – Emergencias</li>
+</ul></div>
+</div>
+<div class="copy">© 2026 L.S.D · Hecho con fines educativos</div>
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/main.js"></script>
+<script src="js/sala-datos.js"></script>
+<script src="js/sala-api.js"></script>
+<script src="js/sala.js"></script>
+<script src="js/burbujas.js"></script>
+</body>
+</html>
