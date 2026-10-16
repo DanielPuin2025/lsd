@@ -26,9 +26,7 @@ function salaApi(P){
   if(r==='cerrar'&&m==='POST'){
    if(j.key!==R.key)return err(403,'Sin permiso.');
    R.estado='cerrada';
-   const d=resumen(R);
-   delete rooms[code];
-   return{d}}
+   return{d:resumen(R)}}
   if(r==='estado'&&m==='POST'){
    if(j.key!==R.key)return err(403,'Sin permiso.');
    if(R.estado==='cerrada'&&j.estado!=='cerrada')return err(409,'El quiz ya está cerrado.');

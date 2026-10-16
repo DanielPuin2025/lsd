@@ -100,9 +100,9 @@ async function espera(){
   else if(d.estado==='cerrada')$('s-emsg').textContent='El quiz está cerrado.';
  }catch(e){
   $('s-go').hidden=true;
-   const salaCerrada=e.message.startsWith('No existe esa sala.')||e.message.startsWith('La sala ya fue cerrada.');
+   const salaCerrada=e.message.startsWith('No existe esa sala.')||e.message.startsWith('La sala está cerrada.');
    $('s-emsg').textContent=salaCerrada
-    ?'El admin cerró y eliminó la sala. Pulsa «Salir de la sala» para volver.'
+    ?'El admin cerró la sala. Pulsa «Salir de la sala» para volver.'
     :e.message;
    if(salaCerrada)clearInterval(timer)
   }
