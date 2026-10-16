@@ -37,7 +37,7 @@ http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x');
  if(u.pathname.startsWith('/api/')){let b='';req.on('data',d=>b+=d);req.on('end',()=>{
   let j={};try{j=JSON.parse(b||'{}')}catch{}
-  const route=u.pathname.slice(5),persist=['crear','unirse','cerrar','estado','respuestas'].includes(route);
+  const route=u.pathname.slice(5),persist=req.method==='POST'&&['crear','unirse','cerrar','estado','respuestas'].includes(route);
   const previous=persist?JSON.stringify(rooms):null;
   let o=sala(rooms,route,req.method,u.searchParams,j);
   if(persist&&!o.s){
