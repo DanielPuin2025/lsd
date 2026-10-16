@@ -1,7 +1,8 @@
 // Servidor del quiz en sala: node server.js  ->  http://localhost:3000 (sin dependencias)
 const http=require('http'),fs=require('fs'),path=require('path');
 const sala=require('./js/sala-api.js')(require('./js/sala-datos.js')),rooms={};
-const host=process.env.HOST||'127.0.0.1',port=process.env.PORT||3000;
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 3000;
 const mime={'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.png':'image/png','.jpeg':'image/jpeg','.jpg':'image/jpeg'};
 http.createServer((req,res)=>{
  const u=new URL(req.url,'http://x');
