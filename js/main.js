@@ -42,7 +42,7 @@ $('next').onclick=()=>{
  qi++;
  if(qi<Q.length)show();
  else{$('prog').textContent='Resultado';$('qtxt').textContent=`Obtuviste ${sc} de ${Q.length}. ${sc>=4?'¡Excelente, estás muy bien informado!':'Sigue aprendiendo con los personajes de arriba.'}`;
-  $('opts').innerHTML='';$('fb').textContent='';$('next').textContent='Reintentar';$('next').onclick=()=>{qi=0;sc=0;location.reload()}}
+  $('opts').innerHTML='';$('fb').textContent='';$('next').textContent='Reintentar';$('next').onclick=()=>{qi=0;sc=0;show()}}
 };
 show();
 

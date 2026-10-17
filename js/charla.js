@@ -47,6 +47,10 @@ async function fin(){
  await say(guide,`¡Terminaste! Acertaste <b>${pts} de 3</b>. Recuerda: decir <b>no</b> es válido, y pedir ayuda siempre es una buena decisión.`,"Guía");
  await say(guide,"Si tú o alguien que conoces necesita apoyo, llama a la <b>Línea 141</b> (ICBF) o a la <b>Línea 106</b> (salud mental).","Guía");
  const i=await opts(["Jugar de nuevo","Volver a la página"]);
- if(i===0)location.reload();else location.href='index.html';
+ if(i===0){location.reload()}else{restart()}
+}
+// Función para reiniciar la charla sin recargar
+function restart(){
+ pts=0;visited.clear();$('score').textContent='Puntos: 0';chat.innerHTML='';ch.innerHTML='';menu();
 }
 menu();
